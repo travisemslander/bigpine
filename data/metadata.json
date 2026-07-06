@@ -3,5 +3,5 @@
   "sourceUrl": "https://beacon.schneidercorp.com/Application.aspx?AppID=197&LayerID=2640&PageTypeID=4&PageID=13649&KeyValue=270280002",
   "periodOfContent": "Beacon last data upload: 2026-07-04 09:36:36",
   "generatedAt": "2026-07-06",
-  "notes": "Parcel 270280002 boundary was manually digitized from a public Beacon map render after locating 65770 Big Pine Rd. This is good enough for family orientation in the web app, but it is not a survey and should be replaced with an official Pine County GIS parcel export when available."
+  "notes": "Parcel 270280002 boundary was manually digitized from a public Beacon map render. This is good enough for family orientation in the web app, but it is not a survey and should be replaced with an official Pine County GIS parcel export when available."
 }

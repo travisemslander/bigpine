@@ -7,19 +7,19 @@
     <title>Emslander's Big Pine</title>
     <link rel="manifest" href="manifest.json" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-    <link rel="stylesheet" href="styles.css?v=20260706-3" />
+    <link rel="stylesheet" href="styles.css?v=20260706-4" />
   </head>
   <body>
     <main id="map" aria-label="Parcel map"></main>
 
     <section class="topbar" aria-label="Map controls">
-      <button id="locateButton" class="icon-button primary is-tracking" type="button" aria-pressed="true" aria-label="Stop following my location" title="Stop following my location">
+      <button id="locateButton" class="icon-button primary" type="button" aria-pressed="false" aria-label="Follow my location" title="Follow my location">
         <i data-lucide="crosshair"></i>
       </button>
     </section>
 
     <section class="status-panel" aria-live="polite">
-      <div id="statusText">Finding your location...</div>
+      <div id="statusText">Loading parcel...</div>
     </section>
 
     <dialog id="parcelDialog">
@@ -33,6 +33,6 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="app.js?v=20260706-3"></script>
+    <script src="app.js?v=20260706-4"></script>
   </body>
 </html>

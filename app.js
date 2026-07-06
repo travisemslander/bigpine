@@ -1,6 +1,6 @@
 const DEFAULT_VIEW = {
   center: [46.119, -92.741],
-  zoom: 13,
+  zoom: 16,
   locateZoom: 16,
   labelsMinZoom: 12,
 };
@@ -18,7 +18,7 @@ const OWNER_FIELDS = [
 
 const PIN_FIELDS = ["pin", "PIN", "parcel_id", "PARCEL_ID", "parcelid", "PARCELID", "pid", "PID"];
 const ADDRESS_FIELDS = ["address", "ADDRESS", "situs", "SITUS", "site_address", "SITE_ADDRESS", "prop_addr", "PROP_ADDR"];
-const LABEL_FIELDS = [...OWNER_FIELDS, "display_label", "label", ...ADDRESS_FIELDS, ...PIN_FIELDS];
+const LABEL_FIELDS = [...OWNER_FIELDS, "display_label", "label", ...PIN_FIELDS];
 
 const state = {
   metadata: null,
@@ -29,7 +29,7 @@ const state = {
   userMarker: null,
   accuracyCircle: null,
   hasParcelData: false,
-  tracking: true,
+  tracking: false,
 };
 
 const elements = {
@@ -77,7 +77,8 @@ async function init() {
   state.settings = settings || {};
   await loadParcels();
   wireControls();
-  startLocation();
+  prepareLocation();
+  updateLocateButton();
 }
 
 async function loadJson(url, fallback) {
@@ -118,7 +119,7 @@ async function loadParcels() {
   }
 
   const count = geojson.features.length.toLocaleString();
-  setStatus(`${count} parcel${geojson.features.length === 1 ? "" : "s"} loaded. Following your location...`);
+  setStatus(`${count} parcel${geojson.features.length === 1 ? "" : "s"} loaded. Tap the crosshair to follow your location.`);
   refreshLabels();
   return true;
 }
@@ -137,9 +138,10 @@ function wireControls() {
   map.on("click", openTappedParcel);
 }
 
-function startLocation() {
+function prepareLocation() {
   if (!navigator.geolocation) {
     setStatus("Location is not available in this browser.");
+    elements.locate.disabled = true;
     return;
   }
   map.on("locationfound", onLocationFound);
@@ -149,7 +151,6 @@ function startLocation() {
       : "Location permission is needed, and parcel boundaries are still not loaded.";
     setStatus(error.message || fallback);
   });
-  startLocationTracking("Finding your location...");
 }
 
 function startLocationTracking(message) {
@@ -275,13 +276,11 @@ function showParcel(feature) {
   const props = feature.properties || {};
   const owner = getFirstValue(props, OWNER_FIELDS) || "Owner unavailable";
   const pin = getFirstValue(props, PIN_FIELDS) || "Unknown";
-  const address = getFirstValue(props, ADDRESS_FIELDS) || "Not listed";
   elements.parcelTitle.textContent = owner === "Owner unavailable" ? getFirstValue(props, LABEL_FIELDS) || owner : owner;
   elements.parcelDetails.innerHTML = "";
 
   const rows = [
     ["Parcel", pin],
-    ["Address", address],
     ["Acres", getFirstValue(props, ["acres", "ACRES", "acreage", "ACREAGE"]) || "Unknown"],
     ["Source", state.metadata?.sourceName || "Local parcel file"],
   ];
@@ -308,7 +307,7 @@ function showParcel(feature) {
     if (elements.dialog.open) elements.dialog.close();
     elements.dialog.showModal();
   } else {
-    alert(`${owner}\nParcel: ${pin}\nAddress: ${address}`);
+    alert(`${owner}\nParcel: ${pin}`);
   }
 }
 

@@ -4,7 +4,7 @@ A small static web app for seeing your phone's GPS location relative to parcel b
 
 ## Current Status
 
-The app now includes an approximate boundary for Pine County parcel `270280002`, the parcel found for `65770 Big Pine Rd, Finlayson, MN 55735`.
+The app now includes an approximate boundary for Pine County parcel `270280002`, labeled `Emslander's Big Pine`.
 
 That boundary was manually digitized from the public Pine County Beacon map render because Pine County does not publish a clean free parcel download in the same way some Minnesota counties do. It is useful for family orientation on a phone, but it is not survey-grade. See `PINE_COUNTY_DATA_REQUEST.md` for the exact data request to replace it with an official GIS export.
 
@@ -15,7 +15,7 @@ That boundary was manually digitized from the public Pine County Beacon map rend
 - Shows parcel lines from `data/parcels.geojson`.
 - Shows parcel labels when zoomed in. The included Pine County parcel is labeled `Emslander's Big Pine`.
 - Keeps data freshness in `data/metadata.json` for maintenance, but does not show it in the family-facing map UI.
-- Lets you tap a parcel for owner, parcel id, address, acres, and a Pine County Beacon link.
+- Lets you tap a parcel for parcel id, acreage, source notes, and a Pine County Beacon link.
 
 Important: parcel GIS data is approximate and should not be treated as a survey boundary.
 
