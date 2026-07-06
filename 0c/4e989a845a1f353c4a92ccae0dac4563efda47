@@ -1,0 +1,26 @@
+app.js
+  s_c0f3655fd84293::t_f2d8b3b08e2894 149,186
+  s_c0f3655fd84293::t_2852c5fd243eec 32,129,132,160-161,163,168,175-180,187-188,214
+  s_c0f3655fd84293::t_9b9c977036d478 150-152
+index.html
+  s_c0f3655fd84293::t_67685b8f943af5 10,36
+styles.css
+  s_c0f3655fd84293::t_7558b89721a3e0 104-112,117-128
+  s_c0f3655fd84293::t_8227bcefd8cda9 129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "0c4e989a845a1f353c4a92ccae0dac4563efda47",
+  "prompts": {},
+  "sessions": {
+    "s_c0f3655fd84293": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f2d52-0554-7ca0-9483-acaaed64677b",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Travis Emslander <travis.emslander@fieldnation.com>"
+    }
+  }
+}
