@@ -1,0 +1,42 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "parcel_id": "270280002",
+        "address": "65770 Big Pine Rd, Finlayson, MN 55735",
+        "display_label": "Emslander's Big Pine",
+        "acres": "7.70 deeded acres",
+        "source": "Pine County Beacon public map",
+        "source_url": "https://beacon.schneidercorp.com/Application.aspx?AppID=197&LayerID=2640&PageTypeID=4&PageID=13649&KeyValue=270280002",
+        "boundary_note": "Approximate parcel boundary digitized from the Pine County Beacon public map render on 2026-07-06. Use for family orientation only, not as a survey boundary."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-93.0434329, 46.2091468],
+            [-93.0433142, 46.2090739],
+            [-93.0431826, 46.209074],
+            [-93.0431802, 46.2081555],
+            [-93.0405077, 46.2081588],
+            [-93.0405054, 46.2072448],
+            [-93.043191, 46.2072415],
+            [-93.0431925, 46.2078173],
+            [-93.0442851, 46.2078159],
+            [-93.0443052, 46.2079347],
+            [-93.0442991, 46.2081038],
+            [-93.0443061, 46.208282],
+            [-93.0443066, 46.2084511],
+            [-93.0443465, 46.2086339],
+            [-93.0442878, 46.2088167],
+            [-93.0441038, 46.2089449],
+            [-93.0437421, 46.2090733],
+            [-93.0434329, 46.2091468]
+          ]
+        ]
+      }
+    }
+  ]
+}

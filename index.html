@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#12343b" />
+    <title>Emslander's Big Pine</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="styles.css?v=20260706-3" />
+  </head>
+  <body>
+    <main id="map" aria-label="Parcel map"></main>
+
+    <section class="topbar" aria-label="Map controls">
+      <button id="locateButton" class="icon-button primary is-tracking" type="button" aria-pressed="true" aria-label="Stop following my location" title="Stop following my location">
+        <i data-lucide="crosshair"></i>
+      </button>
+    </section>
+
+    <section class="status-panel" aria-live="polite">
+      <div id="statusText">Finding your location...</div>
+    </section>
+
+    <dialog id="parcelDialog">
+      <button id="closeDialog" class="icon-button dialog-close" type="button" aria-label="Close" title="Close">
+        <i data-lucide="x"></i>
+      </button>
+      <h1 id="parcelTitle">Parcel</h1>
+      <dl id="parcelDetails"></dl>
+      <a id="propertyLink" class="property-link" href="https://beacon.schneidercorp.com/Application.aspx?AppID=197&LayerID=2640&PageID=1488&PageTypeID=2" target="_blank" rel="noopener">Open Pine County property records</a>
+    </dialog>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="app.js?v=20260706-3"></script>
+  </body>
+</html>
