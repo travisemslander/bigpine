@@ -101,8 +101,30 @@ body {
   color: #fff;
 }
 
+.icon-button.primary.is-pending {
+  background: rgba(15, 118, 110, 0.12);
+  color: var(--accent-strong);
+}
+
+.icon-button.primary.is-pending svg {
+  animation: locate-pulse 1s ease-in-out infinite;
+}
+
 .icon-button:active {
   transform: translateY(1px);
+}
+
+@keyframes locate-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .status-panel {

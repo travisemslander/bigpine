@@ -29,7 +29,7 @@ const state = {
   userMarker: null,
   accuracyCircle: null,
   hasParcelData: false,
-  tracking: false,
+  locationState: "inactive",
 };
 
 const elements = {
@@ -126,10 +126,10 @@ async function loadParcels() {
 
 function wireControls() {
   elements.locate.addEventListener("click", () => {
-    if (state.tracking) {
+    if (state.locationState === "active" || state.locationState === "pending") {
       stopLocationTracking();
     } else {
-      startLocationTracking("Following your location...");
+      startLocationTracking();
     }
   });
 
@@ -146,6 +146,10 @@ function prepareLocation() {
   }
   map.on("locationfound", onLocationFound);
   map.on("locationerror", (error) => {
+    if (state.locationState === "inactive") return;
+    state.locationState = "inactive";
+    map.stopLocate();
+    updateLocateButton();
     const fallback = state.hasParcelData
       ? "Location permission is needed to show where you are."
       : "Location permission is needed, and parcel boundaries are still not loaded.";
@@ -153,29 +157,35 @@ function prepareLocation() {
   });
 }
 
-function startLocationTracking(message) {
-  state.tracking = true;
+function startLocationTracking() {
+  state.locationState = "pending";
   updateLocateButton();
-  setStatus(message);
+  setStatus("Requesting location...");
   map.locate({ enableHighAccuracy: true, watch: true, maximumAge: 4000, timeout: 15000 });
 }
 
 function stopLocationTracking() {
-  state.tracking = false;
+  state.locationState = "inactive";
   map.stopLocate();
   updateLocateButton();
   setStatus("Location updates paused. Tap the crosshair to follow again.");
 }
 
 function updateLocateButton() {
-  elements.locate.classList.toggle("is-tracking", state.tracking);
-  elements.locate.setAttribute("aria-pressed", String(state.tracking));
-  const label = state.tracking ? "Stop following my location" : "Follow my location";
+  const isActive = state.locationState === "active";
+  const isPending = state.locationState === "pending";
+  elements.locate.classList.toggle("is-tracking", isActive);
+  elements.locate.classList.toggle("is-pending", isPending);
+  elements.locate.setAttribute("aria-pressed", String(isActive));
+  const label = isActive || isPending ? "Stop following my location" : "Follow my location";
   elements.locate.setAttribute("aria-label", label);
   elements.locate.setAttribute("title", label);
 }
 
 function onLocationFound(event) {
+  if (state.locationState === "inactive") return;
+  state.locationState = "active";
+  updateLocateButton();
   const latLng = event.latlng;
   if (!state.userMarker) {
     state.userMarker = L.marker(latLng, {
@@ -201,9 +211,7 @@ function onLocationFound(event) {
     state.accuracyCircle.setLatLng(latLng).setRadius(event.accuracy || 0);
   }
 
-  if (state.tracking) {
-    map.setView(latLng, Math.max(map.getZoom(), DEFAULT_VIEW.locateZoom), { animate: true });
-  }
+  map.setView(latLng, Math.max(map.getZoom(), DEFAULT_VIEW.locateZoom), { animate: true });
 
   const accuracy = event.accuracy ? `Accuracy about ${Math.round(event.accuracy)} m.` : "GPS location active.";
   const nextStep = state.hasParcelData ? "Tap a parcel for details." : "Parcel boundaries still need to be loaded from a county export.";
