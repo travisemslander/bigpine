@@ -4,15 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#12343b" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Big Pine" />
     <title>Emslander's Big Pine</title>
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="manifest.json?v=20260713-1" />
+    <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-    <link rel="stylesheet" href="styles.css?v=20260706-5" />
+    <link rel="stylesheet" href="styles.css?v=20260713-1" />
   </head>
   <body>
     <main id="map" aria-label="Parcel map"></main>
 
     <section class="topbar" aria-label="Map controls">
+      <button id="installButton" class="icon-button install-button" type="button" hidden aria-label="Install Big Pine" title="Install Big Pine">
+        <i data-lucide="download"></i>
+      </button>
       <button id="locateButton" class="icon-button primary" type="button" aria-pressed="false" aria-label="Follow my location" title="Follow my location">
         <i data-lucide="crosshair"></i>
       </button>
@@ -31,8 +40,16 @@
       <a id="propertyLink" class="property-link" href="https://beacon.schneidercorp.com/Application.aspx?AppID=197&LayerID=2640&PageID=1488&PageTypeID=2" target="_blank" rel="noopener">Open Pine County property records</a>
     </dialog>
 
+    <dialog id="installDialog" class="install-dialog">
+      <button id="closeInstallDialog" class="icon-button dialog-close" type="button" aria-label="Close" title="Close">
+        <i data-lucide="x"></i>
+      </button>
+      <h1>Install Big Pine</h1>
+      <p id="installInstructions"></p>
+    </dialog>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="app.js?v=20260706-5"></script>
+    <script src="app.js?v=20260713-1"></script>
   </body>
 </html>

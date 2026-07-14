@@ -30,6 +30,7 @@ const state = {
   accuracyCircle: null,
   hasParcelData: false,
   locationState: "inactive",
+  installPrompt: null,
 };
 
 const elements = {
@@ -40,6 +41,10 @@ const elements = {
   parcelTitle: document.querySelector("#parcelTitle"),
   parcelDetails: document.querySelector("#parcelDetails"),
   propertyLink: document.querySelector("#propertyLink"),
+  install: document.querySelector("#installButton"),
+  installDialog: document.querySelector("#installDialog"),
+  closeInstallDialog: document.querySelector("#closeInstallDialog"),
+  installInstructions: document.querySelector("#installInstructions"),
 };
 
 if (window.lucide) {
@@ -77,6 +82,8 @@ async function init() {
   state.settings = settings || {};
   await loadParcels();
   wireControls();
+  prepareInstall();
+  registerServiceWorker();
   prepareLocation();
   updateLocateButton();
 }
@@ -134,8 +141,58 @@ function wireControls() {
   });
 
   elements.closeDialog.addEventListener("click", () => elements.dialog.close());
+  elements.install.addEventListener("click", showInstallPrompt);
+  elements.closeInstallDialog.addEventListener("click", () => elements.installDialog.close());
   map.on("zoomend", refreshLabels);
   map.on("click", openTappedParcel);
+}
+
+function prepareInstall() {
+  if (isStandalone()) return;
+  elements.install.hidden = false;
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    state.installPrompt = event;
+  });
+
+  window.addEventListener("appinstalled", () => {
+    state.installPrompt = null;
+    elements.install.hidden = true;
+  });
+
+  if (isIos()) elements.install.hidden = false;
+}
+
+async function showInstallPrompt() {
+  if (state.installPrompt) {
+    const prompt = state.installPrompt;
+    state.installPrompt = null;
+    elements.install.hidden = true;
+    await prompt.prompt();
+    const choice = await prompt.userChoice;
+    if (choice.outcome !== "accepted") elements.install.hidden = false;
+    return;
+  }
+
+  elements.installInstructions.textContent = isIos()
+    ? "In Safari, tap the Share button, then choose Add to Home Screen."
+    : "Open your browser menu, then choose Install app or Add to Home screen.";
+  if (typeof elements.installDialog.showModal === "function") elements.installDialog.showModal();
+}
+
+function isIos() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
+function isStandalone() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js?v=20260713-1").catch((error) => console.warn("Service worker registration failed", error));
+  }
 }
 
 function prepareLocation() {

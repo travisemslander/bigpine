@@ -1,6 +1,6 @@
 # Emslander's Big Pine
 
-A small static web app for seeing your phone's GPS location relative to parcel boundaries. It is designed for GitHub Pages, Android, and iPhone. There is no server and no paid map key.
+A small installable web app for seeing your phone's GPS location relative to parcel boundaries. It is designed for GitHub Pages, Android, and iPhone. There is no server and no paid map key.
 
 ## Current Status
 
@@ -27,6 +27,15 @@ Important: parcel GIS data is approximate and should not be treated as a survey 
 4. Open the published `https://your-user.github.io/your-repo/` URL on the phones.
 
 GPS in mobile browsers requires HTTPS, so GitHub Pages is a good fit.
+
+## Install On A Phone
+
+Once the live site has loaded over HTTPS:
+
+- **Android:** Tap the download button in the upper-right corner, then approve Chrome's install prompt.
+- **iPhone:** Open the site in Safari, tap the download button, then use Safari's Share button and choose **Add to Home Screen**.
+
+The installed app opens without browser controls and keeps its essential files available offline. The map tiles themselves still require an internet connection.
 
 ## Add Your Parcel Data
 

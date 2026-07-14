@@ -110,6 +110,10 @@ body {
   animation: locate-pulse 1s ease-in-out infinite;
 }
 
+.install-button {
+  color: var(--accent);
+}
+
 .icon-button:active {
   transform: translateY(1px);
 }
@@ -207,6 +211,13 @@ dialog::backdrop {
 dialog h1 {
   margin: 0 48px 12px 0;
   font-size: 1.05rem;
+}
+
+.install-dialog p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 .dialog-close {
