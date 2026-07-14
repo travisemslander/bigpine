@@ -1,0 +1,35 @@
+styles.css
+  s_c0f3655fd84293::t_938cb96ff76f50 113-116,216-221
+  s_c0f3655fd84293::t_68086ce7adf20c 222
+app.js
+  s_c0f3655fd84293::t_3ce83233978cfa 152,173-174,178-180
+  s_c0f3655fd84293::t_938cb96ff76f50 33,44-47,85-86,144-145,150-151,153-172,175-177,181-196
+  s_c0f3655fd84293::t_d8ae6873d11d43 197
+service-worker.js
+  s_c0f3655fd84293::t_938cb96ff76f50 2-5,7-45
+  s_c0f3655fd84293::t_32c139c62d7294 1,6
+README.md
+  s_c0f3655fd84293::t_938cb96ff76f50 3,31-38
+  s_c0f3655fd84293::t_973ef66c45a7e8 39
+index.html
+  s_c0f3655fd84293::t_938cb96ff76f50 7-10,12-14,22-24,43-50,53
+  s_c0f3655fd84293::t_32c139c62d7294 16
+manifest.json
+  s_c0f3655fd84293::t_938cb96ff76f50 4-6,8-9,11-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "74faf9eed3879a4bba18059795b1f3baad534265",
+  "prompts": {},
+  "sessions": {
+    "s_c0f3655fd84293": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f2d52-0554-7ca0-9483-acaaed64677b",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Travis Emslander <travis.emslander@fieldnation.com>"
+    }
+  }
+}
